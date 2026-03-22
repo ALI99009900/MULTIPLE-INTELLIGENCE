@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار الذكاءات المتعددة | Multiple Intelligences Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#080810;--surface:#0f0f1e;--surface2:#161628;
+  --border:rgba(255,255,255,0.07);--text:#eeeef8;--text-muted:#7878a0;
+  --accent:#6c4ff0;--accent2:#f04f7c;--accent3:#4fc3f7;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Cairo','Inter',sans-serif;background:var(--bg);color:var(--text);direction:rtl;overflow-x:hidden;}
+[data-lang="en"]{direction:ltr;}
+[data-lang="en"] body,[data-lang="en"] *{direction:ltr;}
+.container{max-width:1160px;margin:0 auto;padding:0 24px;}
+
+/* LANG TOGGLE */
+.lang-toggle{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:50px;padding:4px;gap:2px;}
+.lang-btn{padding:6px 16px;border-radius:50px;border:none;background:transparent;color:var(--text-muted);font-size:13px;font-weight:700;font-family:'Cairo','Inter',sans-serif;cursor:pointer;transition:all .2s;}
+.lang-btn.active{background:var(--accent);color:white;}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;display:flex;flex-direction:column;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.22;animation:float 10s ease-in-out infinite;}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,#6c4ff0,transparent);top:-250px;right:-150px;}
+.orb2{width:450px;height:450px;background:radial-gradient(circle,#f04f7c,transparent);bottom:50px;left:-120px;animation-delay:4s;}
+.orb3{width:320px;height:320px;background:radial-gradient(circle,#4fc3f7,transparent);top:45%;left:38%;animation-delay:7s;}
+@keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-22px) scale(1.03);}}
+.grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:54px 54px;}
+
+/* NAVBAR */
+.navbar{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(8,8,16,.72);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;}
+.logo-icon{font-size:24px;}
+.nav-right{display:flex;gap:18px;align-items:center;}
+.nav-links{display:flex;gap:26px;align-items:center;}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:14px;transition:color .3s;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{background:var(--accent)!important;color:white!important;padding:8px 20px;border-radius:50px;font-weight:700;transition:transform .2s,box-shadow .2s!important;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(108,79,240,.45);}
+
+/* HERO CONTENT */
+.hero-content{position:relative;z-index:10;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:72px 24px;gap:26px;}
+.disclaimer-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,200,50,.07);border:1px solid rgba(255,200,50,.22);border-radius:50px;padding:9px 22px;font-size:12px;color:#fbbf24;max-width:560px;line-height:1.55;}
+.hero-title{font-size:clamp(36px,6.2vw,72px);font-weight:900;line-height:1.1;}
+.line1{display:block;background:linear-gradient(135deg,#fff 0%,#bba8ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.line2{display:block;background:linear-gradient(135deg,#f04f7c,#6c4ff0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{max-width:560px;font-size:16px;line-height:1.85;color:var(--text-muted);}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;text-decoration:none;padding:14px 36px;border-radius:50px;font-size:15px;font-weight:700;font-family:'Cairo','Inter',sans-serif;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;display:inline-block;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(108,79,240,.5);}
+.btn-secondary{background:transparent;color:var(--text);text-decoration:none;padding:14px 36px;border-radius:50px;font-size:15px;font-weight:600;font-family:'Cairo','Inter',sans-serif;border:2px solid rgba(255,255,255,.16);cursor:pointer;transition:all .2s;display:inline-block;}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+.hero-stats{display:flex;align-items:center;gap:32px;margin-top:10px;}
+.stat{text-align:center;}.stat-num{display:block;font-size:32px;font-weight:900;color:var(--accent);}
+.stat-label{font-size:12px;color:var(--text-muted);}
+.stat-div{width:1px;height:32px;background:var(--border);}
+
+/* DISCLAIMER SECTION */
+.disclaimer-section{background:rgba(255,180,0,.03);border-top:1px solid rgba(255,180,0,.1);border-bottom:1px solid rgba(255,180,0,.1);padding:26px 0;}
+.disclaimer-box{display:flex;gap:18px;align-items:flex-start;background:rgba(255,180,0,.05);border:1px solid rgba(255,180,0,.18);border-radius:14px;padding:22px 26px;}
+.disclaimer-icon{font-size:30px;flex-shrink:0;margin-top:2px;}
+.disclaimer-box h3{font-size:15px;font-weight:700;color:#fbbf24;margin-bottom:7px;}
+.disclaimer-box p{font-size:13px;color:#b09050;line-height:1.8;}
+
+/* ABOUT */
+.about{padding:100px 0;background:var(--surface);}
+.section-tag{display:inline-block;background:rgba(108,79,240,.1);border:1px solid rgba(108,79,240,.26);color:var(--accent);padding:5px 16px;border-radius:50px;font-size:12px;font-weight:700;margin-bottom:12px;}
+.section-title{font-size:clamp(24px,3.6vw,44px);font-weight:900;margin-bottom:12px;line-height:1.2;}
+.section-sub{font-size:15px;color:var(--text-muted);margin-bottom:52px;}
+.about-grid{display:grid;grid-template-columns:1fr 350px;gap:24px;align-items:start;}
+.main-card{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:40px;position:relative;}
+.quote-mark{position:absolute;top:18px;right:34px;font-size:66px;color:var(--accent);opacity:.22;font-family:Georgia,serif;line-height:1;}
+[data-lang="en"] .quote-mark{right:auto;left:34px;}
+.main-card p{font-size:16px;line-height:1.9;color:#b0b0cc;margin-bottom:12px;}
+.main-card strong{color:var(--text);}
+.card-note{display:block;margin-top:18px;background:rgba(108,79,240,.07);border:1px solid rgba(108,79,240,.18);border-radius:10px;padding:11px 14px;font-size:12px;color:#9080c8;line-height:1.7;}
+.about-side{display:flex;flex-direction:column;gap:12px;}
+.principle-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:20px;transition:border-color .3s;}
+.principle-card:hover{border-color:rgba(108,79,240,.32);}
+.principle-icon{font-size:24px;margin-bottom:9px;display:block;}
+.principle-card h3{font-size:15px;font-weight:700;margin-bottom:6px;}
+.principle-card p{font-size:12px;color:var(--text-muted);line-height:1.7;}
+
+/* INTELLIGENCES */
+.intelligences{padding:100px 0;background:var(--bg);}
+.intel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
+.intel-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.intel-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-color,var(--accent));transform:scaleX(0);transition:transform .3s;}
+.intel-card:hover::before{transform:scaleX(1);}
+.intel-card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.12);box-shadow:0 18px 48px rgba(0,0,0,.4);}
+.intel-icon{font-size:42px;margin-bottom:12px;display:block;}
+.intel-name{font-size:17px;font-weight:800;margin-bottom:3px;}
+.intel-en{font-size:11px;margin-bottom:12px;}
+.intel-desc{font-size:12px;line-height:1.75;color:#9090b0;margin-bottom:14px;}
+.intel-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.tag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:2px 10px;border-radius:50px;font-size:10px;color:var(--text-muted);}
+.intel-careers h4{font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:700;}
+.career-list{display:flex;flex-wrap:wrap;gap:4px;}
+.career-tag{font-size:10px;padding:2px 9px;border-radius:50px;border:1px solid;}
+
+/* TEST */
+.test-section{padding:100px 0;background:var(--surface);}
+.test-intro{max-width:660px;margin:0 auto;text-align:center;}
+.intro-cards{display:flex;justify-content:center;gap:12px;margin-bottom:32px;flex-wrap:wrap;}
+.intro-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:12px 20px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;}
+.i-icon{font-size:20px;}
+.intro-instructions{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:28px;text-align:right;}
+[data-lang="en"] .intro-instructions{text-align:left;}
+.intro-instructions h3{font-size:17px;font-weight:700;margin-bottom:9px;}
+.intro-instructions p{font-size:13px;color:var(--text-muted);line-height:1.8;margin-bottom:20px;}
+.scale-guide{display:flex;flex-direction:column;gap:8px;}
+.scale-item{display:flex;align-items:center;gap:10px;font-size:12px;}
+.scale-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.s1{background:#ef4444;}.s2{background:#f97316;}.s3{background:#eab308;}.s4{background:#22c55e;}.s5{background:#6c4ff0;}
+.btn-start{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:15px 44px;border-radius:50px;font-size:16px;font-weight:700;font-family:'Cairo','Inter',sans-serif;cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.btn-start:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(108,79,240,.5);}
+
+.test-container{max-width:660px;margin:0 auto;}
+.test-progress-bar{margin-bottom:26px;}
+.progress-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;font-size:13px;color:var(--text-muted);}
+.progress-track{height:7px;background:var(--surface2);border-radius:50px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:50px;transition:width .4s ease;}
+.question-card{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:36px;position:relative;animation:slideIn .3s ease;}
+@keyframes slideIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.q-intel-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;margin-bottom:16px;}
+.q-number{font-size:12px;color:var(--text-muted);margin-bottom:6px;}
+.q-text{font-size:17px;font-weight:600;line-height:1.75;margin-bottom:28px;}
+.answer-scale{display:flex;justify-content:space-between;gap:9px;margin-bottom:32px;}
+.answer-btn{flex:1;background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:12px 5px;cursor:pointer;font-family:'Cairo','Inter',sans-serif;color:var(--text);font-size:12px;font-weight:600;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.answer-btn:hover{border-color:var(--accent);background:rgba(108,79,240,.09);transform:translateY(-2px);}
+.answer-btn.selected{background:rgba(108,79,240,.17);border-color:var(--accent);}
+.answer-num{font-size:19px;font-weight:900;}
+.answer-label{font-size:9px;color:var(--text-muted);text-align:center;line-height:1.4;}
+.answer-btn.selected .answer-label{color:rgba(255,255,255,.6);}
+.q-nav{display:flex;justify-content:space-between;align-items:center;}
+.btn-prev,.btn-next{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 24px;border-radius:50px;font-size:13px;font-weight:600;font-family:'Cairo','Inter',sans-serif;cursor:pointer;transition:all .2s;}
+.btn-prev:hover,.btn-next:hover{border-color:var(--accent);color:var(--accent);}
+.btn-next.finish{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:white;}
+
+/* RESULTS */
+.results-section{max-width:840px;margin:0 auto;}
+.results-header{text-align:center;margin-bottom:40px;}
+.results-header h2{font-size:36px;font-weight:900;margin-bottom:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.results-header p{font-size:15px;color:var(--text-muted);}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;align-items:center;}
+.chart-container{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:24px;display:flex;justify-content:center;align-items:center;}
+.results-bars{display:flex;flex-direction:column;gap:12px;}
+.result-bar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px;font-weight:600;}
+.result-bar-pct{font-size:14px;font-weight:800;}
+.result-bar-track{height:8px;background:var(--surface);border-radius:50px;overflow:hidden;}
+.result-bar-fill{height:100%;border-radius:50px;transition:width 1.6s cubic-bezier(.16,1,.3,1);}
+.top-intelligence{background:linear-gradient(135deg,rgba(108,79,240,.1),rgba(240,79,124,.1));border:1px solid rgba(108,79,240,.26);border-radius:20px;padding:32px;text-align:center;margin-bottom:28px;}
+.top-intel-icon{font-size:56px;display:block;margin-bottom:12px;}
+.top-intel-title{font-size:12px;color:var(--text-muted);margin-bottom:5px;}
+.top-intel-name{font-size:28px;font-weight:900;margin-bottom:12px;}
+.top-intel-desc{font-size:14px;color:#b0b0cc;line-height:1.8;max-width:460px;margin:0 auto;}
+.results-disclaimer{background:rgba(255,180,0,.05);border:1px solid rgba(255,180,0,.16);border-radius:12px;padding:14px 18px;margin-bottom:26px;font-size:11px;color:#908040;line-height:1.8;text-align:center;}
+.results-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn-save-img,.btn-save-pdf,.btn-retake{padding:12px 28px;border-radius:50px;font-size:14px;font-weight:700;font-family:'Cairo','Inter',sans-serif;cursor:pointer;border:none;transition:all .2s;}
+.btn-save-img{background:linear-gradient(135deg,#6c4ff0,#4fc3f7);color:white;}
+.btn-save-pdf{background:linear-gradient(135deg,#f04f7c,#f97316);color:white;}
+.btn-retake{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
+.btn-save-img:hover,.btn-save-pdf:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3);}
+
+/* FOOTER */
+.footer{background:var(--surface2);border-top:1px solid var(--border);padding:48px 0 24px;}
+.footer-content{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;gap:32px;flex-wrap:wrap;}
+.footer-brand h3{font-size:18px;font-weight:800;margin:9px 0 6px;}
+.footer-brand p{font-size:12px;color:var(--text-muted);max-width:250px;line-height:1.7;}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
+.footer-links a{color:var(--text-muted);text-decoration:none;font-size:13px;transition:color .3s;}
+.footer-links a:hover{color:var(--text);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:20px;text-align:center;font-size:11px;color:var(--text-muted);line-height:1.8;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .navbar{padding:13px 16px;}
+  .nav-links a:not(.nav-cta){display:none;}
+  .hero-content{padding:32px 16px;}
+  .hero-stats{gap:16px;}.stat-num{font-size:24px;}
+  .about-grid{grid-template-columns:1fr;}
+  .intel-grid{grid-template-columns:1fr;}
+  .results-grid{grid-template-columns:1fr;}
+  .question-card{padding:20px;}
+  .q-text{font-size:15px;}
+  .answer-scale{flex-wrap:wrap;}
+  .answer-btn{min-width:calc(33% - 6px);}
+  .disclaimer-badge{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🧠</span>
+      <span data-ar="اختبار الذكاءات المتعددة" data-en="MI Explorer">اختبار الذكاءات المتعددة</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#about" data-ar="النظرية" data-en="Theory">النظرية</a>
+        <a href="#intelligences" data-ar="الذكاءات" data-en="Intelligences">الذكاءات</a>
+        <a href="#test" class="nav-cta" data-ar="ابدأ الاختبار" data-en="Take the Test">ابدأ الاختبار</a>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('ar')">AR</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero-content">
+    <div class="disclaimer-badge">
+      <span>ℹ️</span>
+      <span data-ar="موقع تعليمي مستقل — يشرح نظرية الذكاءات المتعددة ويقدم اختباراً مستوحى منها. غير مرتبط بهوارد غاردنر أو أي مؤسسة رسمية."
+            data-en="Independent educational site — explains the Theory of Multiple Intelligences and offers a test inspired by it. Not affiliated with Howard Gardner or any official institution.">
+        موقع تعليمي مستقل — يشرح نظرية الذكاءات المتعددة ويقدم اختباراً مستوحى منها. غير مرتبط بهوارد غاردنر أو أي مؤسسة رسمية.
+      </span>
+    </div>
+    <h1 class="hero-title">
+      <span class="line1" data-ar="كلنا أذكياء" data-en="We Are All Intelligent">كلنا أذكياء</span>
+      <span class="line2" data-ar="لكن بطرق مختلفة" data-en="But in Different Ways">لكن بطرق مختلفة</span>
+    </h1>
+    <p class="hero-desc"
+       data-ar="نظرية الذكاءات المتعددة تقترح أن الذكاء ليس شيئاً واحداً — بل هو ثمانية أبعاد متمايزة، كل منها طريق فريد للتعلم والإبداع والنجاح."
+       data-en="The Theory of Multiple Intelligences proposes that intelligence is not a single trait — it's eight distinct dimensions, each a unique path to learning, creativity, and success.">
+      نظرية الذكاءات المتعددة تقترح أن الذكاء ليس شيئاً واحداً — بل هو ثمانية أبعاد متمايزة، كل منها طريق فريد للتعلم والإبداع والنجاح.
+    </p>
+    <div class="hero-btns">
+      <a href="#intelligences" class="btn-primary" data-ar="اكتشف الذكاءات الثمانية" data-en="Explore the 8 Intelligences">اكتشف الذكاءات الثمانية</a>
+      <a href="#test" class="btn-secondary" data-ar="خذ الاختبار" data-en="Take the Test">خذ الاختبار</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">8</span><span class="stat-label" data-ar="أنواع ذكاء" data-en="Intelligences">أنواع ذكاء</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num">96</span><span class="stat-label" data-ar="سؤالاً" data-en="Questions">سؤالاً</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num">1983</span><span class="stat-label" data-ar="عام النظرية" data-en="Theory Year">عام النظرية</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="disclaimer-section">
+  <div class="container">
+    <div class="disclaimer-box">
+      <div class="disclaimer-icon">⚠️</div>
+      <div>
+        <h3 data-ar="إخلاء مسؤولية مهم" data-en="Important Disclaimer">إخلاء مسؤولية مهم</h3>
+        <p data-ar="هذا الموقع تعليمي مستقل أُنشئ لأغراض التوعية والتثقيف. النظرية المُشرحة هنا هي نظرية الذكاءات المتعددة التي اقترحها الباحث هوارد غاردنر في كتابه «Frames of Mind» (1983). الاختبار المقدم أداةٌ استكشافية للتأمل الذاتي فحسب، وليس تشخيصاً نفسياً معتمداً ولا يمثّل الأدوات الرسمية لغاردنر. هذا الموقع غير مرتبط بهوارد غاردنر أو جامعة هارفارد أو أي من مؤسساته."
+            data-en="This is an independent educational site created for awareness and learning purposes. The theory explained here was proposed by researcher Howard Gardner in 'Frames of Mind' (1983). The test is a self-reflection tool only — it is not a certified psychological assessment and does not represent Gardner's official instruments. This site is not affiliated with Howard Gardner, Harvard University, or any of his institutions.">
+          هذا الموقع تعليمي مستقل أُنشئ لأغراض التوعية والتثقيف. النظرية المُشرحة هنا هي نظرية الذكاءات المتعددة التي اقترحها الباحث هوارد غاردنر في كتابه «Frames of Mind» (1983). الاختبار المقدم أداةٌ استكشافية للتأمل الذاتي فحسب، وليس تشخيصاً نفسياً معتمداً ولا يمثّل الأدوات الرسمية لغاردنر. هذا الموقع غير مرتبط بهوارد غاردنر أو جامعة هارفارد أو أي من مؤسساته.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="section-tag" data-ar="النظرية" data-en="The Theory">النظرية</div>
+    <h2 class="section-title" data-ar="ما هي نظرية الذكاءات المتعددة؟" data-en="What Is the Theory of Multiple Intelligences?">ما هي نظرية الذكاءات المتعددة؟</h2>
+    <div class="about-grid">
+      <div class="about-card main-card">
+        <div class="quote-mark">"</div>
+        <p data-ar="في عام 1983، اقترح الباحث هوارد غاردنر في كتابه «أطر العقل» أن الذكاء ليس موهبة وحيدة تُقاس بـ IQ. لاحظ أن أطفالاً يُصنَّفون ضعيفي الذكاء في الفصول الدراسية قد يكونون استثنائيين في الموسيقى أو الرياضة أو التواصل الاجتماعي."
+            data-en="In 1983, researcher Howard Gardner proposed in 'Frames of Mind' that intelligence is not a single ability measured by IQ. He observed that children labeled low-intelligence in classrooms could be exceptional in music, athletics, or social interaction.">
+          في عام 1983، اقترح الباحث هوارد غاردنر في كتابه «أطر العقل» أن الذكاء ليس موهبة وحيدة تُقاس بـ IQ. لاحظ أن أطفالاً يُصنَّفون ضعيفي الذكاء في الفصول الدراسية قد يكونون استثنائيين في الموسيقى أو الرياضة أو التواصل الاجتماعي.
+        </p>
+        <p data-ar="وفقاً للنظرية، الذكاء مجموعة من القدرات المتمايزة — كل قدرة قابلة للتطوير والنمو بالتدريب والبيئة المناسبة."
+            data-en="According to the theory, intelligence is a set of distinct capacities — each one can be developed and grown through training and the right environment.">
+          وفقاً للنظرية، الذكاء مجموعة من القدرات المتمايزة — كل قدرة قابلة للتطوير والنمو بالتدريب والبيئة المناسبة.
+        </p>
+        <span class="card-note">📚 Gardner, H. (1983). <em>Frames of Mind: The Theory of Multiple Intelligences.</em> Basic Books.</span>
+      </div>
+      <div class="about-side">
+        <div class="principle-card">
+          <div class="principle-icon">🔬</div>
+          <h3 data-ar="أساس علمي" data-en="Scientific Basis">أساس علمي</h3>
+          <p data-ar="مبنية على علم الأعصاب وعلم النفس التنموي والأنثروبولوجيا الثقافية"
+             data-en="Grounded in neuroscience, developmental psychology, and cultural anthropology">مبنية على علم الأعصاب وعلم النفس التنموي والأنثروبولوجيا الثقافية</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon">🌍</div>
+          <h3 data-ar="تطبيق تربوي" data-en="Educational Application">تطبيق تربوي</h3>
+          <p data-ar="تُطبَّق في آلاف المدارس لتصميم بيئات تعليمية تحترم تنوع المتعلمين"
+             data-en="Applied in thousands of schools to design learning environments that respect diversity">تُطبَّق في آلاف المدارس لتصميم بيئات تعليمية تحترم تنوع المتعلمين</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon">💡</div>
+          <h3 data-ar="الذكاء قابل للنمو" data-en="Intelligence Can Grow">الذكاء قابل للنمو</h3>
+          <p data-ar="كل ذكاء يمكن تطويره — الدماغ يتغير ويتطور مع الممارسة المستمرة"
+             data-en="Every intelligence can be developed — the brain changes and grows with consistent practice">كل ذكاء يمكن تطويره — الدماغ يتغير ويتطور مع الممارسة المستمرة</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTELLIGENCES -->
+<section class="intelligences" id="intelligences">
+  <div class="container">
+    <div class="section-tag" data-ar="الذكاءات الثمانية" data-en="The Eight Intelligences">الذكاءات الثمانية</div>
+    <h2 class="section-title" data-ar="اكتشف أنواع الذكاء" data-en="Explore the Types of Intelligence">اكتشف أنواع الذكاء</h2>
+    <p class="section-sub"
+       data-ar="لا يوجد ذكاء أعلى من آخر — كل نوع هو طريقة فريدة لفهم العالم"
+       data-en="No intelligence is higher than another — each is a unique way of understanding the world">
+      لا يوجد ذكاء أعلى من آخر — كل نوع هو طريقة فريدة لفهم العالم
+    </p>
+    <div class="intel-grid" id="intelGrid"></div>
+  </div>
+</section>
+
+<!-- TEST -->
+<section class="test-section" id="test">
+  <div class="container">
+    <div class="section-tag" data-ar="الاختبار" data-en="The Test">الاختبار</div>
+    <h2 class="section-title" data-ar="اكتشف نمط ذكاءك" data-en="Discover Your Intelligence Profile">اكتشف نمط ذكاءك</h2>
+    <p class="section-sub"
+       data-ar="٩٦ سؤالاً — ١٢ لكل ذكاء من الثمانية — أداة استكشافية للتأمل الذاتي"
+       data-en="96 questions — 12 per each of the 8 intelligences — a self-reflection tool">
+      ٩٦ سؤالاً — ١٢ لكل ذكاء من الثمانية — أداة استكشافية للتأمل الذاتي
+    </p>
+
+    <div class="test-intro" id="testIntro">
+      <div class="intro-cards">
+        <div class="intro-card"><span class="i-icon">⏱️</span><span data-ar="١٥–٢٠ دقيقة" data-en="15–20 min">١٥–٢٠ دقيقة</span></div>
+        <div class="intro-card"><span class="i-icon">❓</span><span data-ar="٩٦ سؤال" data-en="96 Questions">٩٦ سؤال</span></div>
+        <div class="intro-card"><span class="i-icon">📊</span><span data-ar="نتائج فورية" data-en="Instant Results">نتائج فورية</span></div>
+        <div class="intro-card"><span class="i-icon">🎯</span><span data-ar="٨ ذكاءات" data-en="8 Intelligences">٨ ذكاءات</span></div>
+      </div>
+      <div class="intro-instructions">
+        <h3 data-ar="كيف تجيب؟" data-en="How to Answer?">كيف تجيب؟</h3>
+        <p data-ar="أجب بصدق — لا توجد إجابات صحيحة أو خاطئة. هذه أداة استكشافية وليست تشخيصاً نفسياً."
+           data-en="Answer honestly — there are no right or wrong answers. This is a self-exploration tool, not a psychological diagnosis.">
+          أجب بصدق — لا توجد إجابات صحيحة أو خاطئة. هذه أداة استكشافية وليست تشخيصاً نفسياً.
+        </p>
+        <div class="scale-guide">
+          <div class="scale-item"><span class="scale-dot s1"></span><span data-ar="لا تنطبق أبداً (1)" data-en="Never (1)">لا تنطبق أبداً (1)</span></div>
+          <div class="scale-item"><span class="scale-dot s2"></span><span data-ar="نادراً (2)" data-en="Rarely (2)">نادراً (2)</span></div>
+          <div class="scale-item"><span class="scale-dot s3"></span><span data-ar="أحياناً (3)" data-en="Sometimes (3)">أحياناً (3)</span></div>
+          <div class="scale-item"><span class="scale-dot s4"></span><span data-ar="غالباً (4)" data-en="Often (4)">غالباً (4)</span></div>
+          <div class="scale-item"><span class="scale-dot s5"></span><span data-ar="تنطبق تماماً (5)" data-en="Always (5)">تنطبق تماماً (5)</span></div>
+        </div>
+      </div>
+      <button class="btn-start" onclick="startTest()">
+        <span data-ar="ابدأ الاختبار 🚀" data-en="Start the Test 🚀">ابدأ الاختبار 🚀</span>
+      </button>
+    </div>
+
+    <div class="test-container" id="testContainer" style="display:none">
+      <div class="test-progress-bar">
+        <div class="progress-info">
+          <span id="progressText"></span>
+          <span id="progressIntel"></span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+      <div class="question-card" id="questionCard">
+        <div class="q-intel-badge" id="qIntelBadge"></div>
+        <div class="q-number" id="qNumber"></div>
+        <p class="q-text" id="qText"></p>
+        <div class="answer-scale" id="answerScale"></div>
+        <div class="q-nav">
+          <button class="btn-prev" id="btnPrev" onclick="prevQuestion()"><span id="btnPrevTxt">← السابق</span></button>
+          <button class="btn-next" id="btnNext" onclick="nextQuestion()"><span id="btnNextTxt">التالي →</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-section" id="resultsSection" style="display:none">
+      <div class="results-header">
+        <h2 data-ar="نتائج اختبارك" data-en="Your Results">نتائج اختبارك</h2>
+        <p id="resultsSummary"></p>
+      </div>
+      <div class="results-grid">
+        <div class="chart-container"><canvas id="resultsChart" width="360" height="360"></canvas></div>
+        <div class="results-bars" id="resultsBars"></div>
+      </div>
+      <div class="top-intelligence" id="topIntelligence"></div>
+      <div class="results-disclaimer"
+           data-ar="⚠️ هذه النتائج استكشافية فقط ولا تُعدّ تشخيصاً نفسياً معتمداً. مستوحى من نظرية غاردنر (1983) ولا يمثّل أدواته الرسمية."
+           data-en="⚠️ These results are for self-exploration only and do not constitute a certified psychological diagnosis. Inspired by Gardner's theory (1983) — does not represent his official instruments.">
+        ⚠️ هذه النتائج استكشافية فقط ولا تُعدّ تشخيصاً نفسياً معتمداً. مستوحى من نظرية غاردنر (1983) ولا يمثّل أدواته الرسمية.
+      </div>
+      <div class="results-actions">
+        <button class="btn-save-img" onclick="saveAsImage()"><span data-ar="💾 حفظ كصورة" data-en="💾 Save as Image">💾 حفظ كصورة</span></button>
+        <button class="btn-save-pdf" onclick="saveAsPDF()"><span data-ar="📄 حفظ كـ PDF" data-en="📄 Save as PDF">📄 حفظ كـ PDF</span></button>
+        <button class="btn-retake" onclick="retakeTest()"><span data-ar="🔄 أعد الاختبار" data-en="🔄 Retake Test">🔄 أعد الاختبار</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span style="font-size:26px">🧠</span>
+        <h3 data-ar="اختبار الذكاءات المتعددة" data-en="Multiple Intelligences Test">اختبار الذكاءات المتعددة</h3>
+        <p data-ar="موقع تعليمي مستقل. مستوحى من نظرية Gardner (1983). غير مرتبط بأي جهة رسمية."
+           data-en="Independent educational site. Inspired by Gardner's theory (1983). Not affiliated with any official institution.">
+          موقع تعليمي مستقل. مستوحى من نظرية Gardner (1983). غير مرتبط بأي جهة رسمية.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="#about" data-ar="النظرية" data-en="Theory">النظرية</a>
+        <a href="#intelligences" data-ar="الذكاءات" data-en="Intelligences">الذكاءات</a>
+        <a href="#test" data-ar="الاختبار" data-en="Test">الاختبار</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-ar="© 2025 — موقع تعليمي مستقل | النظرية الأصلية: Howard Gardner, Frames of Mind (1983) | هذا الموقع لا يدّعي تمثيل غاردنر أو أعماله الرسمية"
+         data-en="© 2025 — Independent Educational Site | Original Theory: Howard Gardner, Frames of Mind (1983) | This site does not claim to represent Gardner or his official work">
+        © 2025 — موقع تعليمي مستقل | النظرية الأصلية: Howard Gardner, Frames of Mind (1983) | هذا الموقع لا يدّعي تمثيل غاردنر أو أعماله الرسمية
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const INTELLIGENCES=[
+  {id:'linguistic',color:'#3b82f6',rgb:'59,130,246',
+   ar:{name:'الذكاء اللغوي',enName:'Linguistic',icon:'📝',desc:'القدرة على استخدام اللغة بمهارة — قراءةً وكتابةً وخطابةً وتعبيراً دقيقاً.',life:'التعبير عن المشاعر، الإقناع، رواية القصص، تعلم اللغات',work:'المحاماة، الصحافة، التدريس، التسويق، الكتابة',tags:['القراءة','الكتابة','الخطابة','اللغات'],careers:['كاتب','محامٍ','معلم','صحفي','شاعر']},
+   en:{name:'Linguistic Intelligence',enName:'Linguistic',icon:'📝',desc:'The ability to use language skillfully — reading, writing, speaking, and expressing ideas precisely.',life:'Expressing feelings, persuasion, storytelling, learning languages',work:'Law, journalism, teaching, marketing, creative writing',tags:['Reading','Writing','Speaking','Languages'],careers:['Writer','Lawyer','Teacher','Journalist','Poet']}},
+  {id:'logical',color:'#8b5cf6',rgb:'139,92,246',
+   ar:{name:'الذكاء المنطقي الرياضي',enName:'Logical-Mathematical',icon:'🔢',desc:'القدرة على التفكير المنطقي وحل المشكلات ورؤية الأنماط والعلاقات.',life:'حل المشكلات اليومية، إدارة الميزانية، التخطيط المنهجي',work:'الهندسة، البرمجة، المحاسبة، الطب، البحث العلمي',tags:['الرياضيات','التحليل','البرمجة','المنطق'],careers:['مهندس','مبرمج','طبيب','محاسب','عالِم']},
+   en:{name:'Logical-Mathematical Intelligence',enName:'Logical',icon:'🔢',desc:'The ability to think logically, solve problems, and recognize patterns and mathematical relationships.',life:'Solving problems, budget management, systematic planning',work:'Engineering, programming, accounting, medicine, research',tags:['Math','Analysis','Coding','Logic'],careers:['Engineer','Programmer','Doctor','Accountant','Scientist']}},
+  {id:'spatial',color:'#f59e0b',rgb:'245,158,11',
+   ar:{name:'الذكاء المكاني البصري',enName:'Visual-Spatial',icon:'🎨',desc:'القدرة على التفكير بالصور والفضاء ثلاثي الأبعاد وإدراك التفاصيل البصرية.',life:'التنقل في الأماكن، ترتيب الفراغات، الفهم البصري',work:'التصميم المعماري، الفنون، الجراحة، الطيران',tags:['الرسم','التصميم','الخرائط','التشكيل'],careers:['مهندس معماري','مصمم','طيار','نحّات','جراح']},
+   en:{name:'Visual-Spatial Intelligence',enName:'Spatial',icon:'🎨',desc:'The ability to think in images and 3D space, and to perceive visual details accurately.',life:'Navigation, space arrangement, visual understanding of diagrams',work:'Architecture, visual arts, surgery, aviation, graphic design',tags:['Drawing','Design','Maps','3D'],careers:['Architect','Designer','Pilot','Sculptor','Surgeon']}},
+  {id:'musical',color:'#ec4899',rgb:'236,72,153',
+   ar:{name:'الذكاء الموسيقي',enName:'Musical',icon:'🎵',desc:'الحساسية للإيقاع واللحن والنبرة، والقدرة على إنتاج الأنماط الصوتية وتذوقها.',life:'الاسترخاء بالموسيقى، تعزيز التركيز، التعبير العاطفي',work:'التأليف الموسيقي، التعليم، الإنتاج، العلاج بالموسيقى',tags:['الموسيقى','الإيقاع','الغناء','العزف'],careers:['موسيقي','ملحن','منتج','معلم موسيقى','معالج موسيقي']},
+   en:{name:'Musical Intelligence',enName:'Musical',icon:'🎵',desc:'Sensitivity to rhythm, melody and tone, with the ability to produce and appreciate sound patterns.',life:'Relaxing with music, focus enhancement, emotional expression',work:'Music composition, teaching, production, music therapy',tags:['Music','Rhythm','Singing','Playing'],careers:['Musician','Composer','Producer','Music Teacher','Music Therapist']}},
+  {id:'kinesthetic',color:'#10b981',rgb:'16,185,129',
+   ar:{name:'الذكاء الجسدي الحركي',enName:'Kinesthetic',icon:'⚽',desc:'مهارة استخدام الجسم للتعبير والأداء، والتعلم عبر الحركة والتجربة المباشرة.',life:'ممارسة الرياضة، الحرف اليدوية، الرقص، البناء',work:'الرياضة الاحترافية، الجراحة، التمثيل، النجارة',tags:['الرياضة','الرقص','الحرف','الحركة'],careers:['رياضي','راقص','جراح','ممثل','حرفي']},
+   en:{name:'Bodily-Kinesthetic Intelligence',enName:'Kinesthetic',icon:'⚽',desc:'The skill to use the body expressively and learn through movement and direct experience.',life:'Sports, crafts, dancing, building and repair',work:'Professional sports, surgery, acting, carpentry, dance',tags:['Sports','Dance','Crafts','Movement'],careers:['Athlete','Dancer','Surgeon','Actor','Craftsperson']}},
+  {id:'interpersonal',color:'#f97316',rgb:'249,115,22',
+   ar:{name:'الذكاء الاجتماعي',enName:'Interpersonal',icon:'🤝',desc:'القدرة على فهم الآخرين ودوافعهم وبناء علاقات متينة والتفاعل الاجتماعي الفعّال.',life:'بناء الصداقات، حل النزاعات، الدعم العاطفي',work:'القيادة، التدريس، العلاج النفسي، المبيعات',tags:['التواصل','القيادة','التعاطف','الفريق'],careers:['مدير','معلم','معالج نفسي','دبلوماسي','مستشار']},
+   en:{name:'Interpersonal Intelligence',enName:'Interpersonal',icon:'🤝',desc:'The ability to understand others and their motivations, build strong relationships, and interact effectively.',life:'Friendships, conflict resolution, emotional support, teamwork',work:'Leadership, teaching, psychotherapy, sales, social work',tags:['Communication','Leadership','Empathy','Teamwork'],careers:['Manager','Teacher','Therapist','Diplomat','Counselor']}},
+  {id:'intrapersonal',color:'#14b8a6',rgb:'20,184,166',
+   ar:{name:'الذكاء الداخلي الذاتي',enName:'Intrapersonal',icon:'🧘',desc:'القدرة على فهم الذات ومعرفة المشاعر والدوافع والقيم بعمق والوعي الذاتي العالي.',life:'قرارات حياتية سليمة، التطوير الذاتي، الوعي بالمشاعر',work:'ريادة الأعمال، الكتابة، الاستشارات، علم النفس',tags:['الوعي الذاتي','التأمل','الفلسفة','التطوير'],careers:['رائد أعمال','فيلسوف','كاتب','مستشار','مرشد']},
+   en:{name:'Intrapersonal Intelligence',enName:'Intrapersonal',icon:'🧘',desc:'The ability to understand oneself deeply, know one\'s feelings, motivations, and values.',life:'Sound life decisions, self-development, emotional awareness',work:'Entrepreneurship, writing, consulting, psychology',tags:['Self-awareness','Reflection','Philosophy','Growth'],careers:['Entrepreneur','Philosopher','Writer','Consultant','Coach']}},
+  {id:'naturalistic',color:'#22c55e',rgb:'34,197,94',
+   ar:{name:'الذكاء الطبيعي البيئي',enName:'Naturalistic',icon:'🌿',desc:'القدرة على التعرف على أنماط الطبيعة وتصنيف الكائنات الحية وفهم البيئة.',life:'الارتباط بالطبيعة، الزراعة، الطهي الصحي، البيئة',work:'علم الأحياء، الطب البيطري، الزراعة، علم البيئة',tags:['الطبيعة','البيئة','الحيوانات','النباتات'],careers:['عالم أحياء','طبيب بيطري','مزارع','بيئي','جيولوجي']},
+   en:{name:'Naturalistic Intelligence',enName:'Naturalistic',icon:'🌿',desc:'The ability to recognize natural patterns, classify living things, and understand the environment.',life:'Nature connection, farming, healthy cooking, environmental awareness',work:'Biology, veterinary medicine, agriculture, ecology, geology',tags:['Nature','Environment','Animals','Plants'],careers:['Biologist','Veterinarian','Farmer','Ecologist','Geologist']}}
+];
+
+const QUESTIONS={
+ar:[
+  {id:1,intel:'linguistic',text:'أستمتع بقراءة الكتب والمقالات لفترات طويلة دون أن أشعر بالملل'},
+  {id:2,intel:'linguistic',text:'أجد سهولة في شرح الأفكار المعقدة بكلمات بسيطة ومفهومة'},
+  {id:3,intel:'linguistic',text:'أحب الكتابة الإبداعية كالقصص والمقالات أو اليوميات الشخصية'},
+  {id:4,intel:'linguistic',text:'أتذكر المعلومات بشكل أفضل عندما أقرأها أو أكتبها بنفسي'},
+  {id:5,intel:'linguistic',text:'أستمتع بالألعاب اللغوية كالكلمات المتقاطعة وألعاب الكلمات'},
+  {id:6,intel:'linguistic',text:'يُوصف خطابي وكتابتي بالوضوح والتأثير'},
+  {id:7,intel:'linguistic',text:'أتعلم اللغات الجديدة بسرعة أكبر من معظم من أعرفهم'},
+  {id:8,intel:'linguistic',text:'أستخدم الاستعارات والتشبيهات كثيراً لتوضيح أفكاري'},
+  {id:9,intel:'linguistic',text:'أستمتع بالاستماع إلى البودكاست والمحاضرات والروايات المسموعة'},
+  {id:10,intel:'linguistic',text:'أدوّن ملاحظات مفصلة وأحتفظ بقوائم ومذكرات مكتوبة'},
+  {id:11,intel:'linguistic',text:'أشعر بمتعة حين أجد الكلمة الدقيقة التي تعبّر عما أريد قوله'},
+  {id:12,intel:'linguistic',text:'يلجأ إليّ الآخرون للمساعدة في صياغة النصوص والرسائل'},
+  {id:13,intel:'logical',text:'أستمتع بحل الألغاز والمسائل الرياضية الصعبة'},
+  {id:14,intel:'logical',text:'أفكر بشكل منطقي منظم وأبحث عن الأدلة قبل قبول أي فكرة'},
+  {id:15,intel:'logical',text:'أتساءل دائماً عن آلية عمل الأشياء وأبحث عن تفسيرات علمية'},
+  {id:16,intel:'logical',text:'أستمتع بالبرمجة أو التفكير الخوارزمي وحل المشكلات التقنية'},
+  {id:17,intel:'logical',text:'أرى الأنماط والعلاقات بين الأشياء بسرعة أكبر من الآخرين'},
+  {id:18,intel:'logical',text:'أخطط لمشاريعي بعناية وأضع جداول ومنهجيات واضحة'},
+  {id:19,intel:'logical',text:'أحب الشطرنج والألعاب الاستراتيجية التي تتطلب التفكير العميق'},
+  {id:20,intel:'logical',text:'أفضل التفكير في خطوات منطقية متسلسلة لحل المشكلات'},
+  {id:21,intel:'logical',text:'أتعامل مع المشكلات بطريقة تحليلية وأقسّمها إلى أجزاء أصغر'},
+  {id:22,intel:'logical',text:'أميل إلى تقييم المواقف بناءً على الحقائق والأرقام لا العواطف'},
+  {id:23,intel:'logical',text:'أجد متعة في فهم الأنظمة المعقدة وكيفية تفاعل أجزائها'},
+  {id:24,intel:'logical',text:'أضع فرضيات وأختبرها بشكل منهجي حين أواجه مشكلة جديدة'},
+  {id:25,intel:'spatial',text:'أستطيع تصوّر الأشياء والأماكن في ذهني بوضوح تام'},
+  {id:26,intel:'spatial',text:'أستمتع بالرسم والتصميم البصري والتعبير الفني'},
+  {id:27,intel:'spatial',text:'أجد سهولة في قراءة الخرائط والمخططات الهندسية'},
+  {id:28,intel:'spatial',text:'ألاحظ التفاصيل البصرية التي يفوت الآخرين ملاحظتها'},
+  {id:29,intel:'spatial',text:'أستطيع تجميع الأشياء دون الرجوع للتعليمات المكتوبة'},
+  {id:30,intel:'spatial',text:'أستمتع بالألغاز ثلاثية الأبعاد ومكعبات روبيك'},
+  {id:31,intel:'spatial',text:'لديّ حس جمالي قوي وأقدّر التصاميم والتكوينات البصرية'},
+  {id:32,intel:'spatial',text:'أتعلم بشكل أفضل من المخططات والصور والرسوم البيانية'},
+  {id:33,intel:'spatial',text:'أنتبه إلى الألوان والأشكال والأنماط البصرية في محيطي'},
+  {id:34,intel:'spatial',text:'يسهل عليّ التوجه في الأماكن الجديدة ونادراً ما أضيع'},
+  {id:35,intel:'spatial',text:'أستطيع تخيّل كيف سيبدو شيء ما قبل بنائه أو تصميمه'},
+  {id:36,intel:'spatial',text:'أفضّل التعليمات المرئية على الكلامية حين أتعلم مهارة جديدة'},
+  {id:37,intel:'musical',text:'أتذكر الألحان والأغاني بسرعة وبشكل تلقائي'},
+  {id:38,intel:'musical',text:'أستطيع سماع نوتة خاطئة في الموسيقى بسهولة'},
+  {id:39,intel:'musical',text:'أجد نفسي أنقر بأصابعي أو أدق الإيقاع بلا وعي'},
+  {id:40,intel:'musical',text:'الموسيقى تؤثر بعمق في مزاجي وحالتي النفسية'},
+  {id:41,intel:'musical',text:'أستمتع بتعلم العزف أو الغناء أو التأليف الموسيقي'},
+  {id:42,intel:'musical',text:'أفضل التعلم مع موسيقى خلفية لأنها تساعدني على التركيز'},
+  {id:43,intel:'musical',text:'أستطيع التمييز بين الآلات الموسيقية المختلفة في أي تسجيل'},
+  {id:44,intel:'musical',text:'أحفظ كلمات الأغاني بسهولة وسرعة كبيرتين'},
+  {id:45,intel:'musical',text:'الأصوات المحيطة تشغل انتباهي بسهولة أكبر من غيري'},
+  {id:46,intel:'musical',text:'أربط الأحداث والذكريات بالأغاني التي سمعتها في تلك اللحظات'},
+  {id:47,intel:'musical',text:'أشعر بنشوة حقيقية حين أسمع موسيقى أحبها'},
+  {id:48,intel:'musical',text:'أستطيع معرفة إيقاع الموسيقى وبنيتها بمجرد الاستماع'},
+  {id:49,intel:'kinesthetic',text:'أتعلم المهارات الجديدة بشكل أفضل بالتجربة والممارسة المباشرة'},
+  {id:50,intel:'kinesthetic',text:'أستمتع بممارسة الرياضة والأنشطة الجسدية المختلفة'},
+  {id:51,intel:'kinesthetic',text:'أجد صعوبة في الجلوس هادئاً لفترة طويلة وأحتاج للحركة'},
+  {id:52,intel:'kinesthetic',text:'أستخدم يديّ وجسدي كثيراً أثناء الحديث والشرح'},
+  {id:53,intel:'kinesthetic',text:'أتمتع بتنسيق حركي جيد وأتحكم في حركات جسدي بدقة'},
+  {id:54,intel:'kinesthetic',text:'أستمتع بالأعمال اليدوية والحرف والبناء والإصلاح'},
+  {id:55,intel:'kinesthetic',text:'أتذكر ما فعلته أكثر بكثير مما قرأته أو سمعته'},
+  {id:56,intel:'kinesthetic',text:'أحب الأنشطة التي تتطلب الدقة الجسدية كالطبخ أو النجارة'},
+  {id:57,intel:'kinesthetic',text:'أشعر بتحسن ملحوظ في مزاجي بعد التمرين الجسدي'},
+  {id:58,intel:'kinesthetic',text:'أستطيع تقليد حركات الآخرين بسهولة ودقة عالية'},
+  {id:59,intel:'kinesthetic',text:'أتعلم الرياضات والمهارات الحركية الجديدة بسرعة لافتة'},
+  {id:60,intel:'kinesthetic',text:'أفضّل التعلم بالتجربة الميدانية على التعلم النظري البحت'},
+  {id:61,intel:'interpersonal',text:'أستمتع بالعمل ضمن مجموعات أكثر من العمل منفرداً'},
+  {id:62,intel:'interpersonal',text:'يلجأ إليّ الناس كثيراً للحصول على النصيحة والدعم'},
+  {id:63,intel:'interpersonal',text:'أستطيع قراءة مشاعر الآخرين حتى دون أن يتكلموا'},
+  {id:64,intel:'interpersonal',text:'أجد سهولة في التواصل مع أشخاص من خلفيات مختلفة'},
+  {id:65,intel:'interpersonal',text:'أستمتع بتعليم الآخرين ومشاركة معرفتي معهم'},
+  {id:66,intel:'interpersonal',text:'أُجيد حل النزاعات والوساطة بين الأطراف المتعارضة'},
+  {id:67,intel:'interpersonal',text:'أستطيع التأثير في الآخرين وتحفيزهم بشكل طبيعي'},
+  {id:68,intel:'interpersonal',text:'أحب المناسبات الاجتماعية وأشعر بالطاقة بعدها'},
+  {id:69,intel:'interpersonal',text:'يُقال عني إنني مستمع جيد وشخص يُسهل التحدث إليه'},
+  {id:70,intel:'interpersonal',text:'أنجح في قيادة المجموعات وتنسيق العمل الجماعي'},
+  {id:71,intel:'interpersonal',text:'ألاحظ التغييرات الدقيقة في مزاج الآخرين وأستجيب لها'},
+  {id:72,intel:'interpersonal',text:'أبني علاقات متينة وأحافظ عليها على المدى البعيد'},
+  {id:73,intel:'intrapersonal',text:'أقضي وقتاً في التأمل والتفكير في أهدافي وقيمي الشخصية'},
+  {id:74,intel:'intrapersonal',text:'أعرف نقاط قوتي وضعفي بشكل دقيق وواضح'},
+  {id:75,intel:'intrapersonal',text:'أفضل أحياناً العمل بمفردي والتفكير باستقلالية تامة'},
+  {id:76,intel:'intrapersonal',text:'أمتلك أهدافاً واضحة وأسعى لتحقيقها بثبات ودأب'},
+  {id:77,intel:'intrapersonal',text:'أتساءل كثيراً عن معنى الحياة والأسئلة الوجودية الكبرى'},
+  {id:78,intel:'intrapersonal',text:'أدرك مشاعري بسرعة وأستطيع وصفها بدقة'},
+  {id:79,intel:'intrapersonal',text:'أحتاج لوقت خاص بمفردي لإعادة شحن طاقتي'},
+  {id:80,intel:'intrapersonal',text:'أكتب يومياتي أو أسجل أفكاري بانتظام'},
+  {id:81,intel:'intrapersonal',text:'أتعلم من تجاربي وأحلل أخطائي بموضوعية'},
+  {id:82,intel:'intrapersonal',text:'أتخذ قراراتي بشكل مستقل وأثق بحدسي الداخلي'},
+  {id:83,intel:'intrapersonal',text:'أفهم دوافعي وأسباب سلوكي بشكل عميق'},
+  {id:84,intel:'intrapersonal',text:'أستمتع بالتأمل الذاتي وأجد فيه مصدراً للنمو والوضوح'},
+  {id:85,intel:'naturalistic',text:'أستمتع بقضاء وقت في الطبيعة وأشعر بارتياح في الهواء الطلق'},
+  {id:86,intel:'naturalistic',text:'ألاحظ التغييرات في الطقس والبيئة المحيطة بدقة'},
+  {id:87,intel:'naturalistic',text:'أستطيع التعرف على أنواع النباتات والحيوانات والطيور'},
+  {id:88,intel:'naturalistic',text:'أهتم بقضايا البيئة وصون الطبيعة والاستدامة'},
+  {id:89,intel:'naturalistic',text:'أحب العناية بالنباتات أو الحديقة المنزلية'},
+  {id:90,intel:'naturalistic',text:'أشعر بالاتزان الداخلي حين أتواجد في الطبيعة'},
+  {id:91,intel:'naturalistic',text:'أحب تصنيف الأشياء وترتيبها وإيجاد الأنماط المخفية فيها'},
+  {id:92,intel:'naturalistic',text:'أستمتع بالتخييم والرحلات الطبيعية والأنشطة الخارجية'},
+  {id:93,intel:'naturalistic',text:'أفضل الحلول الطبيعية والصحية في الطعام والحياة'},
+  {id:94,intel:'naturalistic',text:'أجد الأنماط والتشابهات بين الكائنات والظواهر الطبيعية بسهولة'},
+  {id:95,intel:'naturalistic',text:'أشعر بمسؤولية تجاه البيئة وأمارس سلوكيات صديقة للطبيعة'},
+  {id:96,intel:'naturalistic',text:'أُقدّر الجمال الطبيعي وأنتبه لتفاصيل المشهد الطبيعي المحيط بي'}
+],
+en:[
+  {id:1,intel:'linguistic',text:'I enjoy reading books and articles for long periods without getting bored'},
+  {id:2,intel:'linguistic',text:'I find it easy to explain complex ideas in simple, understandable words'},
+  {id:3,intel:'linguistic',text:'I enjoy creative writing like stories, essays, or personal journals'},
+  {id:4,intel:'linguistic',text:'I remember information better when I read or write it myself'},
+  {id:5,intel:'linguistic',text:'I enjoy language games like crossword puzzles and word games'},
+  {id:6,intel:'linguistic',text:'My speaking and writing are often described as clear and impactful'},
+  {id:7,intel:'linguistic',text:'I learn new languages faster than most people I know'},
+  {id:8,intel:'linguistic',text:'I use metaphors and similes frequently to clarify my ideas'},
+  {id:9,intel:'linguistic',text:'I enjoy listening to podcasts, lectures, and audiobooks'},
+  {id:10,intel:'linguistic',text:'I take detailed notes and keep written lists and diaries'},
+  {id:11,intel:'linguistic',text:'I feel pleasure when I find exactly the right word to express something'},
+  {id:12,intel:'linguistic',text:'Others often ask me to help them write texts and messages'},
+  {id:13,intel:'logical',text:'I enjoy solving puzzles and challenging math problems'},
+  {id:14,intel:'logical',text:'I think logically and look for evidence before accepting any idea'},
+  {id:15,intel:'logical',text:'I always wonder how things work and look for scientific explanations'},
+  {id:16,intel:'logical',text:'I enjoy programming or algorithmic thinking and solving technical problems'},
+  {id:17,intel:'logical',text:'I see patterns and relationships between things faster than others'},
+  {id:18,intel:'logical',text:'I plan carefully and create clear schedules and methodologies'},
+  {id:19,intel:'logical',text:'I enjoy chess and strategy games that require deep thinking'},
+  {id:20,intel:'logical',text:'I prefer thinking in logical sequential steps to solve problems'},
+  {id:21,intel:'logical',text:'I approach problems analytically, breaking them into smaller parts'},
+  {id:22,intel:'logical',text:'I tend to evaluate situations based on facts and numbers, not emotions'},
+  {id:23,intel:'logical',text:'I find pleasure in understanding complex systems and how their parts interact'},
+  {id:24,intel:'logical',text:'I form hypotheses and test them systematically when facing a new problem'},
+  {id:25,intel:'spatial',text:'I can visualize objects and places in my mind very clearly'},
+  {id:26,intel:'spatial',text:'I enjoy drawing, visual design, and artistic expression'},
+  {id:27,intel:'spatial',text:'I find it easy to read maps and engineering blueprints'},
+  {id:28,intel:'spatial',text:'I notice visual details that others often miss'},
+  {id:29,intel:'spatial',text:'I can assemble objects without referring to written instructions'},
+  {id:30,intel:'spatial',text:"I enjoy 3D puzzles and Rubik's cubes"},
+  {id:31,intel:'spatial',text:'I have a strong aesthetic sense and appreciate beautiful visual compositions'},
+  {id:32,intel:'spatial',text:'I learn better through diagrams, images, and visual charts'},
+  {id:33,intel:'spatial',text:'I notice colors, shapes, and visual patterns in my surroundings'},
+  {id:34,intel:'spatial',text:'I orient myself easily in new places and rarely get lost'},
+  {id:35,intel:'spatial',text:'I can imagine how something will look before building or designing it'},
+  {id:36,intel:'spatial',text:'I prefer visual instructions over verbal ones when learning a new skill'},
+  {id:37,intel:'musical',text:'I remember melodies and songs quickly and automatically'},
+  {id:38,intel:'musical',text:'I can easily hear a wrong note in music'},
+  {id:39,intel:'musical',text:'I find myself tapping my fingers or drumming rhythms without noticing'},
+  {id:40,intel:'musical',text:'Music deeply affects my mood and mental state'},
+  {id:41,intel:'musical',text:'I enjoy learning to play instruments, sing, or compose music'},
+  {id:42,intel:'musical',text:'I prefer learning with background music as it helps me focus'},
+  {id:43,intel:'musical',text:'I can distinguish between different musical instruments in any recording'},
+  {id:44,intel:'musical',text:'I memorize song lyrics easily and quickly'},
+  {id:45,intel:'musical',text:'Surrounding sounds capture my attention more easily than most people'},
+  {id:46,intel:'musical',text:'I associate events and memories with songs I heard at those moments'},
+  {id:47,intel:'musical',text:'I feel genuine joy and elation when listening to music I love'},
+  {id:48,intel:'musical',text:'I can identify the rhythm and structure of music just by listening'},
+  {id:49,intel:'kinesthetic',text:'I learn new skills better through direct experience and practice'},
+  {id:50,intel:'kinesthetic',text:'I enjoy sports and various physical activities'},
+  {id:51,intel:'kinesthetic',text:"I find it hard to sit still for long and need to move around"},
+  {id:52,intel:'kinesthetic',text:'I use my hands and body a lot when talking and explaining'},
+  {id:53,intel:'kinesthetic',text:'I have good motor coordination and control my body movements well'},
+  {id:54,intel:'kinesthetic',text:'I enjoy handicrafts, building, and repair work'},
+  {id:55,intel:'kinesthetic',text:'I remember what I did far better than what I merely read or heard'},
+  {id:56,intel:'kinesthetic',text:'I enjoy activities requiring physical precision like cooking or woodworking'},
+  {id:57,intel:'kinesthetic',text:'I feel a noticeable improvement in mood after physical exercise'},
+  {id:58,intel:'kinesthetic',text:"I can mimic others' movements easily and accurately"},
+  {id:59,intel:'kinesthetic',text:'I learn new sports and motor skills noticeably fast'},
+  {id:60,intel:'kinesthetic',text:'I prefer learning by doing over theoretical study'},
+  {id:61,intel:'interpersonal',text:'I enjoy working in groups more than working alone'},
+  {id:62,intel:'interpersonal',text:'People often come to me for advice and emotional support'},
+  {id:63,intel:'interpersonal',text:"I can read others' feelings even without them speaking"},
+  {id:64,intel:'interpersonal',text:'I find it easy to connect with people from very different backgrounds'},
+  {id:65,intel:'interpersonal',text:'I enjoy teaching others and sharing what I know with them'},
+  {id:66,intel:'interpersonal',text:"I'm skilled at resolving conflicts and mediating between opposing parties"},
+  {id:67,intel:'interpersonal',text:'I can naturally influence and motivate others'},
+  {id:68,intel:'interpersonal',text:'I enjoy social occasions and feel energized after them'},
+  {id:69,intel:'interpersonal',text:"I'm told I'm a good listener and easy to talk to"},
+  {id:70,intel:'interpersonal',text:'I succeed at leading groups and coordinating teamwork'},
+  {id:71,intel:'interpersonal',text:"I notice subtle changes in others' moods and respond intelligently"},
+  {id:72,intel:'interpersonal',text:'I build strong relationships and maintain them over the long term'},
+  {id:73,intel:'intrapersonal',text:'I spend time reflecting on my goals and personal values'},
+  {id:74,intel:'intrapersonal',text:'I know my strengths and weaknesses clearly and precisely'},
+  {id:75,intel:'intrapersonal',text:'I sometimes prefer working alone and thinking independently'},
+  {id:76,intel:'intrapersonal',text:'I have clear goals and steadily pursue them with persistence'},
+  {id:77,intel:'intrapersonal',text:"I often wonder about life's meaning and big existential questions"},
+  {id:78,intel:'intrapersonal',text:'I quickly identify my emotions and can describe them accurately'},
+  {id:79,intel:'intrapersonal',text:'I need personal alone time to recharge and renew myself'},
+  {id:80,intel:'intrapersonal',text:'I keep a journal or regularly record my personal thoughts'},
+  {id:81,intel:'intrapersonal',text:'I learn from my experiences and analyze my mistakes objectively'},
+  {id:82,intel:'intrapersonal',text:'I make decisions independently and trust my inner intuition'},
+  {id:83,intel:'intrapersonal',text:'I deeply understand my own motivations and reasons for my behavior'},
+  {id:84,intel:'intrapersonal',text:'I enjoy self-reflection and find in it a source of growth and clarity'},
+  {id:85,intel:'naturalistic',text:'I enjoy spending time in nature and feel deeply at ease outdoors'},
+  {id:86,intel:'naturalistic',text:'I notice changes in weather and the surrounding environment accurately'},
+  {id:87,intel:'naturalistic',text:'I can identify species of plants, animals, and birds'},
+  {id:88,intel:'naturalistic',text:'I care about environmental issues, nature conservation, and sustainability'},
+  {id:89,intel:'naturalistic',text:'I enjoy caring for plants or a home garden'},
+  {id:90,intel:'naturalistic',text:'I feel inner balance when in natural surroundings'},
+  {id:91,intel:'naturalistic',text:'I enjoy classifying and ordering things, finding hidden patterns in them'},
+  {id:92,intel:'naturalistic',text:'I enjoy camping, hiking, and outdoor activities'},
+  {id:93,intel:'naturalistic',text:'I prefer natural and healthy solutions in food and daily life'},
+  {id:94,intel:'naturalistic',text:'I easily find patterns and similarities among natural organisms and phenomena'},
+  {id:95,intel:'naturalistic',text:'I feel responsibility toward the environment and practice eco-friendly behaviors'},
+  {id:96,intel:'naturalistic',text:'I appreciate natural beauty and notice details of the natural scenery around me'}
+]};
+
+const LABELS={ar:['لا أبداً','نادراً','أحياناً','غالباً','دائماً'],en:['Never','Rarely','Sometimes','Often','Always']};
+
+let lang='ar',curQ=0,answers=new Array(96).fill(0),started=false,showingResults=false;
+
+function setLang(l){
+  lang=l;
+  const html=document.documentElement;
+  html.setAttribute('data-lang',l);html.setAttribute('lang',l);html.setAttribute('dir',l==='ar'?'rtl':'ltr');
+  document.body.style.direction=l==='ar'?'rtl':'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active',(l==='ar'&&b.textContent==='AR')||(l==='en'&&b.textContent==='EN'));
+  });
+  document.querySelectorAll('[data-ar]').forEach(el=>{
+    const t=el.getAttribute('data-'+l);if(t)el.textContent=t;
+  });
+  renderIntelligenceCards();
+  if(started&&!showingResults)renderQuestion();
+  if(showingResults)renderResults(true);
+}
+
+function renderIntelligenceCards(){
+  const g=document.getElementById('intelGrid');if(!g)return;
+  g.innerHTML=INTELLIGENCES.map(intel=>{
+    const d=intel[lang];
+    return `<div class="intel-card" style="--card-color:${intel.color};--card-rgb:${intel.rgb}">
+      <span class="intel-icon">${d.icon}</span>
+      <div class="intel-name">${d.name}</div>
+      <div class="intel-en" style="color:${intel.color};opacity:.65;font-size:11px;margin-bottom:10px">${d.enName}</div>
+      <p class="intel-desc">${d.desc}</p>
+      <div style="margin-bottom:10px"><small style="color:var(--text-muted);font-size:10px;font-weight:700">${lang==='ar'?'الحياة اليومية':'Daily Life'}</small><p style="font-size:11px;color:#9090b0;line-height:1.6;margin-top:3px">${d.life}</p></div>
+      <div class="intel-tags">${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="intel-careers"><h4>💼 ${lang==='ar'?'المجالات المهنية':'Careers'}</h4>
+      <div class="career-list">${d.careers.map(c=>`<span class="career-tag" style="background:rgba(${intel.rgb},.09);border-color:rgba(${intel.rgb},.28);color:${intel.color}">${c}</span>`).join('')}</div></div>
+    </div>`;
+  }).join('');
+}
+
+function startTest(){
+  document.getElementById('testIntro').style.display='none';
+  document.getElementById('testContainer').style.display='block';
+  curQ=0;answers=new Array(96).fill(0);started=true;showingResults=false;
+  renderQuestion();document.getElementById('test').scrollIntoView({behavior:'smooth'});
+}
+
+function renderQuestion(){
+  const qs=QUESTIONS[lang],q=qs[curQ],intel=INTELLIGENCES.find(i=>i.id===q.intel),d=intel[lang],lbs=LABELS[lang];
+  const pct=((curQ+1)/96)*100;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=lang==='ar'?`السؤال ${curQ+1} من 96`:`Question ${curQ+1} of 96`;
+  document.getElementById('progressIntel').textContent=`${d.icon} ${d.name}`;
+  const badge=document.getElementById('qIntelBadge');
+  badge.innerHTML=`${d.icon} ${d.name}`;
+  badge.style.cssText=`background:rgba(${intel.rgb},.11);border:1px solid rgba(${intel.rgb},.28);color:${intel.color};display:inline-flex;align-items:center;gap:6px;padding:4px 13px;border-radius:50px;font-size:11px;font-weight:700;margin-bottom:14px`;
+  document.getElementById('qNumber').textContent=lang==='ar'?`السؤال ${curQ+1}`:`Question ${curQ+1}`;
+  document.getElementById('qText').textContent=q.text;
+  document.getElementById('answerScale').innerHTML=[1,2,3,4,5].map(v=>`
+    <button class="answer-btn${answers[curQ]===v?' selected':''}" onclick="selectAnswer(${v})"
+      style="${answers[curQ]===v?`background:rgba(${intel.rgb},.17);border-color:${intel.color};`:''}">
+      <span class="answer-num">${v}</span>
+      <span class="answer-label">${lbs[v-1]}</span>
+    </button>`).join('');
+  document.getElementById('btnPrev').style.opacity=curQ===0?'0.3':'1';
+  document.getElementById('btnPrev').disabled=curQ===0;
+  const isLast=curQ===95,nb=document.getElementById('btnNext'),nt=document.getElementById('btnNextTxt');
+  nt.textContent=isLast?(lang==='ar'?'عرض النتائج ✨':'Show Results ✨'):(lang==='ar'?'التالي →':'Next →');
+  if(isLast)nb.classList.add('finish');else nb.classList.remove('finish');
+  document.getElementById('btnPrevTxt').textContent=lang==='ar'?'← السابق':'← Previous';
+  const card=document.getElementById('questionCard');card.style.animation='none';card.offsetHeight;card.style.animation='slideIn .3s ease';
+}
+
+function selectAnswer(v){answers[curQ]=v;renderQuestion();}
+function nextQuestion(){if(!answers[curQ]){shakeCard();return;}if(curQ<95){curQ++;renderQuestion();}else{renderResults(false);}}
+function prevQuestion(){if(curQ>0){curQ--;renderQuestion();}}
+function shakeCard(){const c=document.getElementById('questionCard');c.style.border='1px solid #f04f7c';setTimeout(()=>c.style.border='1px solid var(--border)',600);}
+
+let lastPct=null;
+let userEmail='';
+
+function renderResults(rerender){
+  if(!rerender){document.getElementById('testContainer').style.display='none';showingResults=true;}
+  document.getElementById('resultsSection').style.display='block';
+  const scores={};INTELLIGENCES.forEach(i=>scores[i.id]=0);
+  QUESTIONS[lang].forEach((q,i)=>scores[q.intel]+=(answers[i]||0));
+  const pct={};INTELLIGENCES.forEach(i=>pct[i.id]=Math.round((scores[i.id]/60)*100));
+  lastPct=pct;
+  const topId=Object.keys(pct).reduce((a,b)=>pct[a]>pct[b]?a:b);
+  const topIntel=INTELLIGENCES.find(i=>i.id===topId),topD=topIntel[lang];
+  const sum=document.getElementById('resultsSummary');
+  sum.textContent=lang==='ar'?`أكملت الاختبار! ذكاؤك الأبرز: "${topD.name}" بنسبة ${pct[topId]}%`:`Done! Your strongest: "${topD.name}" at ${pct[topId]}%`;
+  const sorted=[...INTELLIGENCES].sort((a,b)=>pct[b.id]-pct[a.id]);
+  document.getElementById('resultsBars').innerHTML=sorted.map(intel=>{
+    const d=intel[lang];
+    return `<div class="result-bar-item">
+      <div class="result-bar-header"><span>${d.icon} ${d.name}</span><span class="result-bar-pct" style="color:${intel.color}">${pct[intel.id]}%</span></div>
+      <div class="result-bar-track"><div class="result-bar-fill" id="bar-${intel.id}" style="width:0%;background:linear-gradient(90deg,${intel.color},${intel.color}80)"></div></div>
+    </div>`;
+  }).join('');
+  setTimeout(()=>sorted.forEach((intel,i)=>setTimeout(()=>{const b=document.getElementById(`bar-${intel.id}`);if(b)b.style.width=pct[intel.id]+'%';},i*70)),200);
+  document.getElementById('topIntelligence').innerHTML=`
+    <span class="top-intel-icon">${topD.icon}</span>
+    <p class="top-intel-title">${lang==='ar'?'ذكاؤك الأبرز':'Your Strongest Intelligence'}</p>
+    <h3 class="top-intel-name">${topD.name} — ${pct[topId]}%</h3>
+    <p class="top-intel-desc">${topD.desc}</p><br>
+    <p style="color:var(--accent);font-weight:600;font-size:13px">💼 ${topD.work}</p>`;
+  const disc=document.querySelector('.results-disclaimer');
+  if(disc)disc.textContent=disc.getAttribute('data-'+lang);
+  document.querySelectorAll('.results-actions [data-ar]').forEach(el=>el.textContent=el.getAttribute('data-'+lang));
+  setTimeout(()=>drawChart(pct),400);
+  if(!rerender){
+    document.getElementById('resultsSection').scrollIntoView({behavior:'smooth'});
+    showEmailPrompt(pct,topD);
+  }
+}
+
+function showEmailPrompt(pct,topD){
+  // إزالة أي نموذج سابق
+  const old=document.getElementById('emailPrompt');if(old)old.remove();
+  const box=document.createElement('div');
+  box.id='emailPrompt';
+  box.style.cssText='background:rgba(108,79,240,.08);border:1px solid rgba(108,79,240,.25);border-radius:16px;padding:22px 24px;margin-bottom:22px;text-align:center;';
+  box.innerHTML=`
+    <p style="font-size:14px;font-weight:600;margin-bottom:12px;">
+      ${lang==='ar'?'📧 أدخل إيميلك لحفظ نتيجتك (اختياري)':'📧 Enter your email to save your result (optional)'}
+    </p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <input id="emailInput" type="email" placeholder="${lang==='ar'?'example@email.com':'example@email.com'}"
+        style="padding:10px 16px;border-radius:50px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#eeeef8;font-family:Cairo,Inter,sans-serif;font-size:13px;width:240px;outline:none;"/>
+      <button onclick="submitResult()" style="padding:10px 24px;border-radius:50px;background:linear-gradient(135deg,#6c4ff0,#f04f7c);color:white;border:none;font-family:Cairo,Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer;">
+        ${lang==='ar'?'إرسال ✉️':'Send ✉️'}
+      </button>
+      <button onclick="document.getElementById('emailPrompt').remove()" style="padding:10px 20px;border-radius:50px;background:transparent;color:#7878a0;border:1px solid rgba(255,255,255,.1);font-family:Cairo,Inter,sans-serif;font-size:12px;cursor:pointer;">
+        ${lang==='ar'?'تخطّ':'Skip'}
+      </button>
+    </div>
+    <p id="emailStatus" style="font-size:12px;color:#7878a0;margin-top:10px;"></p>`;
+  const disc=document.querySelector('.results-disclaimer');
+  disc.parentNode.insertBefore(box,disc);
+}
+
+async function submitResult(){
+  const emailInput=document.getElementById('emailInput');
+  const status=document.getElementById('emailStatus');
+  const email=emailInput?emailInput.value.trim():'';
+  userEmail=email;
+  const pct=lastPct;
+  const topId=Object.keys(pct).reduce((a,b)=>pct[a]>pct[b]?a:b);
+  const topIntel=INTELLIGENCES.find(i=>i.id===topId);
+  const now=new Date();
+  const timestamp=now.toLocaleDateString('ar-SA')+' — '+now.toLocaleTimeString('ar-SA');
+
+  // بناء محتوى الإيميل
+  const body=`
+🧠 نتيجة اختبار ذكاء جديدة
+━━━━━━━━━━━━━━━━━━━━━━
+📅 التاريخ والوقت: ${timestamp}
+📧 الإيميل: ${email||'لم يُدخَل'}
+🌐 اللغة: ${lang==='ar'?'العربية':'English'}
+━━━━━━━━━━━━━━━━━━━━━━
+🏆 الذكاء الأبرز: ${topIntel.ar.name} (${pct[topId]}%)
+━━━━━━━━━━━━━━━━━━━━━━
+📊 النتائج التفصيلية:
+📝 اللغوي: ${pct.linguistic}%
+🔢 المنطقي: ${pct.logical}%
+🎨 المكاني: ${pct.spatial}%
+🎵 الموسيقي: ${pct.musical}%
+⚽ الحركي: ${pct.kinesthetic}%
+🤝 الاجتماعي: ${pct.interpersonal}%
+🧘 الذاتي: ${pct.intrapersonal}%
+🌿 الطبيعي: ${pct.naturalistic}%
+  `.trim();
+
+  if(status)status.textContent=lang==='ar'?'⏳ جارٍ الإرسال...':'⏳ Sending...';
+
+  try{
+    const formData=new FormData();
+    formData.append('_to','ALHOMAISAN@GMAIL.COM');
+    formData.append('_subject','🧠 نتيجة اختبار ذكاء جديدة — '+timestamp);
+    formData.append('_template','box');
+    formData.append('_captcha','false');
+    formData.append('التاريخ_والوقت', timestamp);
+    formData.append('الإيميل', email||'لم يُدخَل');
+    formData.append('اللغة', lang==='ar'?'العربية':'English');
+    formData.append('الذكاء_الأبرز', topIntel.ar.name+' ('+pct[topId]+'%)');
+    formData.append('اللغوي', pct.linguistic+'%');
+    formData.append('المنطقي', pct.logical+'%');
+    formData.append('المكاني', pct.spatial+'%');
+    formData.append('الموسيقي', pct.musical+'%');
+    formData.append('الحركي', pct.kinesthetic+'%');
+    formData.append('الاجتماعي', pct.interpersonal+'%');
+    formData.append('الذاتي', pct.intrapersonal+'%');
+    formData.append('الطبيعي', pct.naturalistic+'%');
+
+    const res=await fetch('https://formsubmit.co/ALHOMAISAN@GMAIL.COM',{method:'POST',body:formData});
+    if(res.ok||res.status===200||res.type==='opaque'){
+      if(status)status.textContent=lang==='ar'?'✅ تم الإرسال! ستصلك النتيجة على إيميلك.':'✅ Sent! Check your email.';
+      if(status)status.style.color='#22c55e';
+      setTimeout(()=>{const p=document.getElementById('emailPrompt');if(p)p.remove();},3000);
+    }else{
+      throw new Error('failed');
+    }
+  }catch(e){
+    if(status)status.textContent=lang==='ar'?'⚠️ تعذّر الإرسال. جرّب مرة أخرى.':'⚠️ Could not send. Try again.';
+    if(status)status.style.color='#f97316';
+  }
+}
+
+function drawChart(pct){
+  const canvas=document.getElementById('resultsChart');if(!canvas)return;
+  const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=Math.min(W,H)/2-50;
+  const n=INTELLIGENCES.length,step=(2*Math.PI)/n,start=-Math.PI/2;
+  ctx.clearRect(0,0,W,H);
+  [.25,.5,.75,1].forEach(r=>{
+    ctx.beginPath();
+    for(let i=0;i<n;i++){const a=start+i*step,x=cx+Math.cos(a)*R*r,y=cy+Math.sin(a)*R*r;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+    ctx.closePath();ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;ctx.stroke();
+  });
+  for(let i=0;i<n;i++){const a=start+i*step;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*R,cy+Math.sin(a)*R);ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;ctx.stroke();}
+  ctx.beginPath();
+  INTELLIGENCES.forEach((intel,i)=>{const a=start+i*step,r=(pct[intel.id]/100)*R,x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.closePath();
+  const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,R);grd.addColorStop(0,'rgba(108,79,240,.5)');grd.addColorStop(1,'rgba(240,79,124,.18)');
+  ctx.fillStyle=grd;ctx.fill();ctx.strokeStyle='rgba(108,79,240,.7)';ctx.lineWidth=2;ctx.stroke();
+  INTELLIGENCES.forEach((intel,i)=>{
+    const a=start+i*step,lx=cx+Math.cos(a)*(R+26),ly=cy+Math.sin(a)*(R+26);
+    ctx.font='bold 16px Cairo';ctx.fillStyle=intel.color;ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(intel.ar.icon,lx,ly-7);
+    ctx.font='9px Inter';ctx.fillStyle='rgba(255,255,255,.5)';ctx.fillText(pct[intel.id]+'%',lx,ly+8);
+    const r2=(pct[intel.id]/100)*R,dx=cx+Math.cos(a)*r2,dy=cy+Math.sin(a)*r2;
+    ctx.beginPath();ctx.arc(dx,dy,4,0,2*Math.PI);ctx.fillStyle=intel.color;ctx.fill();
+  });
+}
+
+function retakeTest(){
+  document.getElementById('resultsSection').style.display='none';
+  document.getElementById('testIntro').style.display='block';
+  answers=new Array(96).fill(0);curQ=0;started=false;showingResults=false;
+  document.getElementById('test').scrollIntoView({behavior:'smooth'});
+}
+
+async function saveAsImage(){
+  const btn=document.querySelector('.btn-save-img'),sp=btn.querySelector('span');
+  btn.disabled=true;sp.textContent=lang==='ar'?'⏳ جارٍ الحفظ...':'⏳ Saving...';
+  try{const c=await html2canvas(document.getElementById('resultsSection'),{backgroundColor:'#0f0f1e',scale:2,useCORS:true});
+    const a=document.createElement('a');a.download=lang==='ar'?'نتائج-الذكاءات.png':'MI-Results.png';a.href=c.toDataURL('image/png');a.click();}
+  catch(e){alert('Error saving.');}
+  btn.disabled=false;sp.textContent=lang==='ar'?'💾 حفظ كصورة':'💾 Save as Image';
+}
+
+async function saveAsPDF(){
+  const btn=document.querySelector('.btn-save-pdf'),sp=btn.querySelector('span');
+  btn.disabled=true;sp.textContent=lang==='ar'?'⏳ جارٍ الحفظ...':'⏳ Saving...';
+  try{const c=await html2canvas(document.getElementById('resultsSection'),{backgroundColor:'#0f0f1e',scale:1.5,useCORS:true});
+    const imgData=c.toDataURL('image/png'),{jsPDF}=window.jspdf;
+    const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    const pW=pdf.internal.pageSize.getWidth(),pH=(c.height*pW)/c.width;
+    pdf.setFontSize(13);pdf.setTextColor(108,79,240);pdf.text('Multiple Intelligences — Exploratory Profile',pW/2,11,{align:'center'});
+    pdf.setFontSize(8);pdf.setTextColor(100,100,140);pdf.text('Independent educational tool. Not an official Gardner assessment.',pW/2,17,{align:'center'});
+    pdf.addImage(imgData,'PNG',0,21,pW,Math.min(pH,256));
+    pdf.save(lang==='ar'?'نتائج-الذكاءات.pdf':'MI-Results.pdf');}
+  catch(e){alert('Error saving.');}
+  btn.disabled=false;sp.textContent=lang==='ar'?'📄 حفظ كـ PDF':'📄 Save as PDF';
+}
+
+document.addEventListener('DOMContentLoaded',renderIntelligenceCards);
+</script>
+</body>
+</html>
